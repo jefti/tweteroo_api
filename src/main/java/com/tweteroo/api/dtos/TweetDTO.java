@@ -7,9 +7,9 @@ import lombok.Data;
 
 @Data
 public class TweetDTO {
-    @NotBlank
+    
     @Positive
-    private long userId;
+    private Long userId;
     
     @NotBlank
     @Size(max = 280, message = "O tweet não pode conter mais que 280 caracteres.")

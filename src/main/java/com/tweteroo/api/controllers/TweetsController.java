@@ -34,19 +34,15 @@ public class TweetsController {
     }
 
     @GetMapping("/user/{userId}")
-    public ResponseEntity<Object> getUserTweets(@PathVariable("userId") long id){
-        Optional<TweetModel> tweets = tweetService.findById(id);
+    public ResponseEntity<Object> getUserTweets(@PathVariable("userId") Long userId){
+        List<TweetModel> tweets = tweetService.findById(userId);
 
-        if(!tweets.isPresent()){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
-
-        return ResponseEntity.status(HttpStatus.OK).body(tweets.get());
+        return ResponseEntity.status(HttpStatus.OK).body(tweets);
     }
 
     @PostMapping
     public ResponseEntity<Object> createTweet(@RequestBody @Valid TweetDTO dto){
-        tweetService.save(dto);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        Optional<TweetModel> tweet = tweetService.save(dto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(tweet);
     }
 }
