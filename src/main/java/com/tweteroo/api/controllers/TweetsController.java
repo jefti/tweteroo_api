@@ -34,7 +34,7 @@ public class TweetsController {
     }
 
     @GetMapping("/user/{userId}")
-    public ResponseEntity<Object> getUserTweets(@PathVariable("userId") Long id){
+    public ResponseEntity<Object> getUserTweets(@PathVariable("userId") long id){
         Optional<TweetModel> tweets = tweetService.findById(id);
 
         if(!tweets.isPresent()){

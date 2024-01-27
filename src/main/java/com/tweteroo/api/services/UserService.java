@@ -1,15 +1,13 @@
 package com.tweteroo.api.services;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import com.tweteroo.api.dtos.UserDTO;
 import com.tweteroo.api.models.UserModel;
 import com.tweteroo.api.repositories.UserRepository;
 
-import jakarta.validation.Valid;
 
 @Service
 public class UserService {
@@ -19,8 +17,12 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public UserModel save(UserDTO userdto){
+    public Optional<UserModel> save(UserDTO userdto){
+        if(userRepository.existsByUsername(userdto.getUsername())){
+            return Optional.empty();
+        }
+
         UserModel user = new UserModel(userdto);
-        return userRepository.save(user);
+        return Optional.of(userRepository.save(user));
     }
 }
