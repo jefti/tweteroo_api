@@ -19,12 +19,6 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-        public ResponseEntity<Object> createUser(@RequestBody @Valid UserDTO body){
-        UserModel user = new UserModel(body);
-        userRepository.save(user);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
-    }
-
     public UserModel save(UserDTO userdto){
         UserModel user = new UserModel(userdto);
         return userRepository.save(user);
