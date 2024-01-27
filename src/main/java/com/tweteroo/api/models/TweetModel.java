@@ -1,5 +1,7 @@
 package com.tweteroo.api.models;
 
+import com.tweteroo.api.dtos.TweetDTO;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -23,4 +25,8 @@ public class TweetModel {
 
     @Column(length=280, nullable = false)
     private String text;
+
+    public TweetModel(TweetDTO dto){
+        this.text = dto.getTweet();
+    }
 }

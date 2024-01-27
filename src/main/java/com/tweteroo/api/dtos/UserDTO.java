@@ -9,5 +9,7 @@ public class UserDTO {
     @NotBlank
     @Size(max = 100, message = "O tamanho máximo do username é 100 caracteres.")
     private String username;
+    
+    @NotBlank
     private String avatar;
 }
